@@ -78,7 +78,7 @@ const ProjectsData = [
     title: "Appointment Booking System",
     tag: "Full-Stack",
     description:
-      "A full-stack system using React, Node.js (Express.js) and MySQL, developed during internship training to solve small to medium business owner's problem in scheduling customer bookings.",
+      "A full-stack prototype system using React, Node.js (Express.js) and MySQL, developed during internship training to solve small to medium business owner's problem in scheduling customer bookings.",
     image:
       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop",
     link: "https://appointment-booking-system-omega.vercel.app",
