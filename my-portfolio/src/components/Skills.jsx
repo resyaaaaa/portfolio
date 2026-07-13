@@ -211,7 +211,7 @@ const Skills = forwardRef(({ className }, ref) => {
           </button>
 
           <span className="font-body text-xs text-muted tracking-widest uppercase">
-            Page {currentPage} of {totalPages}
+            {currentPage} of {totalPages}
           </span>
 
           <button

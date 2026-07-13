@@ -175,7 +175,7 @@ const Project = forwardRef(({ projects = ProjectsData, className }, ref) => {
                       className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full border border-text/20
                         text-text text-xs sm:text-sm font-medium px-3 sm:px-4 py-1 sm:py-1.5 hover:bg-text/5 transition-colors duration-300"
                     >
-                      Read More
+                      View Work
                       <ArrowRight size={14} />
                     </a>
                   </div>
