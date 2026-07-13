@@ -1,11 +1,83 @@
-@import "tailwindcss";
-
-/* Load the custom Google Fonts */
-/*@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
-*/
+/* 1. Google Fonts MUST be line #1 */
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Chewy&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Smooth scrolling override */
-html {
-  scroll-behavior: smooth;
+/* 2. Tailwind Framework next */
+@import "tailwindcss";
+
+/* 3. Your configuration */
+@theme {
+  /* Colors */
+  --color-bg: #f5f1e8;
+  --color-accent: #1a1a1a;
+  --color-accent-2: #b0a99f;
+  --color-text: #1a1a1a;
+  --color-muted: #dccece;
+  --color-glass: rgba(245, 241, 232, 0.5);
+
+  /* Fonts mapped to your loaded Google Fonts */
+  --font-display: "Josefin Sans", sans-serif; /* Swapped from Cormorant to match your imports */
+  --font-body: "Josefin Sans", sans-serif;    /* Swapped from Inter to match your imports */
+  --font-chewy: "Chewy", cursive;
+  --font-gummy: "Sour Gummy", sans-serif;
+
+  /* Additional colors */
+  --accent-mauve: #b08aad;
+  --porcelain-rose: #f0e4e8;
+  --rose-light: #f5eef0;
+  --rose-medium: #e8d9dd;
+  --text-light: #6b7280;
+  --text-medium: #4b5563;
+}
+
+@layer components {
+
+  .navbar {
+    @apply fixed top-0 left-0 right-0 z-100 px-4 py-2 flex items-center justify-between;
+    background: var(--color-glass);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+  }
+
+  .hero-section {
+    @apply relative min-h-screen flex items-center justify-center px-8 pt-24 pb-16 overflow-hidden;
+    perspective: 1000px;
+  }
+
+  .hero-bg {
+    @apply absolute inset-0 z-0;
+  }
+
+  .hero-content {
+    @apply text-center relative z-1;
+  }
+
+  .hero-button {
+    @apply inline-block no-underline mt-10 px-8 py-3 text-[0.8rem] font-body tracking-[0.15em] uppercase rounded-full cursor-pointer transition-colors duration-300;
+
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border: 1px solid var(--color-accent);
+  }
+
+  .hero-button:hover {
+    background: transparent;
+    color: var(--color-accent);
+  }
+
+  .section-custom {
+    @apply relative z-1 py-20 px-8 max-w-275 mx-auto;
+  }
+
+  .details-btn {
+    @apply px-6 py-2 text-[0.72rem] font-body tracking-[0.18em] uppercase rounded-full cursor-pointer border-none;
+
+    color: var(--color-accent);
+    background: var(--color-bg);
+  }
+
+  .footer {
+    @apply relative z-1 py-12 px-8 text-center;
+    border-top: 1px solid rgba(26, 26, 26, .08);
+    background: var(--color-bg);
+  }
 }

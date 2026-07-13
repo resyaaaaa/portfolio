@@ -1,0 +1,85 @@
+import React, { useState, useRef, useCallback, forwardRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { Suspense } from "react";
+import "./index.css";
+import Skills from "./components/Skills.jsx";
+import About from "./components/About.jsx";
+
+const CARDS = [
+    { id: "projects", icon: "❏", title: "Works", desc: "Defining visual identities with timeless elegance and clarity.", accent: "#1a1a1a" },
+    { id: "skills", icon: "◎", title: "Skills", desc: "Creating immersive online spaces that tell compelling visual stories.", accent: "#8b8378" },
+    { id: "about", icon: "⬙", title: "About Me", desc: "Guiding the aesthetic of campaigns and projects from concept to completion.", accent: "#b0a99f" },
+    { id: "contact", icon: "≡", title: "Contact", desc: "Looking forward to stay connected with you.", accent: "#1a1a1a" }
+];
+
+function NavBar({ onNavigate }) {
+    const links = ["Projects", "Skills", "About", "Contact"];
+    return <nav className="navbar">
+        <img src="./icons/resya.png" className="h-17.5 max-h-25 w-auto object-contain block" />
+        <div className="hidden md:flex gap-8">{links.map(link => <a key={link} href={`#${link.toLowerCase()}`} onClick={e => { e.preventDefault(); onNavigate(link.toLowerCase()) }} className="font-body text-muted no-underline text-[0.85rem] tracking-widest uppercase transition-colors duration-300 cursor-pointer hover:text-text">{link}</a>)}</div>
+    </nav>
+}
+
+function HeroSection() {
+    const [mouse, setMouse] = useState({ x: 0, y: 0 });
+    const handleMouseMove = useCallback(e => { const r = e.currentTarget.getBoundingClientRect(); setMouse({ x: ((e.clientX - r.left) / r.width - .5) * 2, y: ((e.clientY - r.top) / r.height - .5) * 2 }) }, []);
+    return <section onMouseMove={handleMouseMove} className="hero-section">
+        <div className="hero-bg"><Canvas><Suspense fallback={null}><OrbitControls enableZoom={false} autoRotate autoRotateSpeed={.5} /><ambientLight intensity={.5} /><directionalLight position={[-2, 5, 2]} intensity={1} /><Sphere args={[1, 100, 200]} scale={2.5}><MeshDistortMaterial color="#E9D5E6" distort={.4} speed={1.5} roughness={.1} /></Sphere></Suspense></Canvas></div>
+        <div className="hero-content" style={{ transform: `translate(${mouse.x * -15}px,${mouse.y * -15}px)`, transition: "transform .15s ease-out" }}>
+            <h1 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-none font-semibold text-text m-0">Hello World!<br />This is Resya</h1>
+            <p className="font-body text-[clamp(0.95rem,1.8vw,1.15rem)] text-muted max-w-120 mx-auto mt-6 leading-[1.6]">I am a Software Engineering graduate. A passionate Mobile Application & Web Developer | AI & Automation</p>
+            <a href="mailto:resyalizatul@gmail.com" className="hero-button">Let's Connect</a>
+        </div>
+    </section>
+}
+
+function FlipCard({ id, icon, title, desc, accent, onNavigate }) {
+    const [flipped, setFlipped] = useState(false);
+    return <div className="flip-container" onMouseEnter={() => setFlipped(true)} onMouseLeave={() => setFlipped(false)}>
+        <div className={`flip-inner ${flipped ? "active" : ""}`}>
+            <div className="flip-front">
+                <span className="text-[1.6rem]" style={{ color: accent }}>{icon}</span>
+                <div><h3 className="font-display text-text text-[1.3rem] font-semibold mb-2">{title}</h3><p className="font-body text-muted text-[0.82rem] leading-[1.6] m-0">{desc}</p></div>
+            </div>
+            <div className="flip-back">
+                <span className="text-[2.2rem]">{icon}</span>
+                <p className="font-body text-[0.82rem] text-center leading-[1.6] m-0">See <strong className="text-bg font-medium">{title}</strong>.</p>
+                <button onClick={() => onNavigate(id)} className="details-btn">Details</button>
+            </div>
+        </div>
+    </div>
+}
+function CardGrid({ onNavigate }) { return <section className="section-custom"><h2 className="font-display font-semibold text-5xl text-text mb-8">Features</h2><div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-[1.4rem]">{CARDS.map(card => <FlipCard key={card.id}{...card} onNavigate={onNavigate} />)}</div></section> }
+
+const Project = forwardRef((props, ref) => <section ref={ref} className="py-25 min-h-[80vh] flex items-center justify-center"><h2 className="font-display font-semibold text-5xl text-text">Projects</h2></section>);
+
+const Contact = forwardRef((props, ref) => <section ref={ref} className="py-25 min-h-[80vh] flex items-center justify-center"><h2 className="font-display font-semibold text-5xl text-text">Contact Me</h2></section>);
+
+function Footer() {
+    const socialLinks = [{ name: "GitHub", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg", url: "https://github.com/resyaaaaa" }, { name: "LinkedIn", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-plain.svg", url: "https://www.linkedin.com/in/resyalizatul-omar-83a9a029a/" }, { name: "Email", icon: "", url: "mailto:resyalizatul@gmail.com" }];
+    return <footer className="footer"><div className="flex justify-center gap-6 mb-4">{socialLinks.map(link => <a key={link.name} href={link.url} className="text-muted no-underline text-2xl transition-colors duration-300 hover:text-text">{link.icon ? <img src={link.icon} alt={link.name} className="w-[22px] h-[22px]" /> : <span>{link.icon}</span>}</a>)}</div><p className="font-body text-muted text-[0.8rem] m-0">© 2024 Resya. All Rights Reserved.</p></footer>
+}
+
+export default function App() {
+    const projectRef = useRef(null), skillsRef = useRef(null), aboutRef = useRef(null), contactRef = useRef(null);
+
+    const handleNavigate = id => {
+        const refs = { projects: projectRef, skills: skillsRef, about: aboutRef, contact: contactRef };
+        const ref = refs[id];
+        if (ref?.current) ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    return <div className="min-h-screen bg-bg text-text font-body overflow-x-hidden">
+        <NavBar onNavigate={handleNavigate} />
+        <main>
+            <HeroSection />
+            <CardGrid onNavigate={handleNavigate} />
+            <Project ref={projectRef} />
+            <Skills ref={skillsRef} />
+            <About ref={aboutRef} />
+            <Contact ref={contactRef} />
+        </main>
+        <Footer />
+    </div>
+}
