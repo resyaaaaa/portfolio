@@ -39,15 +39,6 @@ const ProjectsData = [
     link: "#",
   },
   {
-    title: "Aurora Dashboard",
-    tag: "Product Design",
-    description:
-      "A real-time analytics dashboard with custom charting, dark mode, and drag-to-reorder widgets.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-    link: "#",
-  },
-  {
     title: "Dolce Gelato",
     tag: "Frontend Development",
     description:
@@ -56,7 +47,7 @@ const ProjectsData = [
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1200&auto=format&fit=crop",
     link: "#",
   },
-  {
+  /*{
     title: "Yaya Kitchen",
     tag: "UI/UX Design",
     description:
@@ -64,7 +55,7 @@ const ProjectsData = [
     image:
       "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=1200&auto=format&fit=crop",
     link: "#",
-  },
+  },*/
   {
     title: "KKMJP",
     tag: "Web Platform",
@@ -81,7 +72,7 @@ const ProjectsData = [
       "A full-stack prototype system using React, Node.js (Express.js) and MySQL, developed during internship training to solve small to medium business owner's problem in scheduling customer bookings.",
     image:
       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200&auto=format&fit=crop",
-    link: "https://appointment-booking-system-omega.vercel.app",
+    link: "https://appointment-booking-system-8ivm.vercel.app",
   },
 ];
 
